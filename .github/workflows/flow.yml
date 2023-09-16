@@ -21,4 +21,7 @@ jobs:
           pip install aiohttp asyncio requests 
 
       - name: execute python script
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python noc_scraper.py
