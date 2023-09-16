@@ -44,8 +44,8 @@ HEADERS = {"Accept":"application/json, text/javascript, */*; q=0.01",
            "Referer":"http://www.newoldcamera.com/",
            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/117.0"}
 
-TOKEN = os.environ['TOKEN']#'6061187094:AAGnfBDoFtL88mQt_ueKgAxdRTQJT26smro'
-CHAT_ID = os.environ['CHAT_ID']#'475157247'
+TOKEN = os.environ['TOKEN']
+CHAT_ID = os.environ['CHAT_ID']
 TL_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
 
 Product = namedtuple('Product', ['keyword', 'data'])
