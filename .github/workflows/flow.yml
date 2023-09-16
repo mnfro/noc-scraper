@@ -1,0 +1,24 @@
+name: noc-scraper
+
+on:
+  schedule:
+    - cron: '0,15,30,45 9-18 * * 2-6'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3
+        
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7.7'
+          
+      - name: install python packages
+        run: |
+          pip install aiohttp asyncio requests 
+
+      - name: execute python script
+        run: python noc_scraper.py
