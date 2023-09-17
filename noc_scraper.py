@@ -1,9 +1,10 @@
-
 import aiohttp
 import asyncio
 from collections import namedtuple
 import requests
 import os
+import json
+import time
 
 API_URL = "http://api.newoldcamera.com/api/products"
 
@@ -41,48 +42,57 @@ TOKEN = os.environ['TOKEN']
 CHAT_ID = os.environ['CHAT_ID']
 TL_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
 
-Brand = namedtuple('Brand', ['keywords', 'data_params'])
-fujifilm_cameras = Brand(['X-100', "X-E4"], DATA_FUJI_CAMERA)
-ricoh_cameras = Brand(['GR'], DATA_RICOH_CAMERA)
-canon_cameras = Brand(['G7X'], DATA_CANON_CAMERA)
-fujifilm_lens = Brand(['27'], DATA_FUJI_LENS)
+Match = namedtuple('Match', ['keywords', 'data_params'])
+fujifilm_cameras = Match(['X-100', "X-E4"], DATA_FUJI_CAMERA)
+ricoh_cameras = Match(['GR'], DATA_RICOH_CAMERA)
+canon_cameras = Match(['G7X'], DATA_CANON_CAMERA)
+fujifilm_lens = Match(['27'], DATA_FUJI_LENS)
 
-list_to_scrape =  [fujifilm_cameras, ricoh_cameras, canon_cameras, fujifilm_lens]
+match_list = [fujifilm_cameras, ricoh_cameras, canon_cameras, fujifilm_lens]
+ignore_id_list = []
 
-async def scrape(brand: Brand):
+async def scrape(match: Match):
    async with aiohttp.ClientSession() as session:
-      response = await session.post(url=API_URL, data=brand.data_params, headers=HEADERS)
+      response = await session.post(url=API_URL, data=match.data_params, headers=HEADERS)
       json_output = await response.json()
-      await lookForMatch(json_output, brand)
+      await lookForMatch(json_output, match)
 
-async def lookForMatch(json, brand: Brand):
+async def lookForMatch(json, match: Match):
    results = json['Result']
    if results:
       for result in results:
-         for keyword in brand.keywords:
-            if keyword in result['modello']:
+         for keyword in match.keywords:
+            if keyword in result['modello'] and result['ID'] not in ignore_id_list:
                msg = f"❗️Match❗️\n{result['modello']} | €{result['prezzovendita']} | {result['stato']} | {'Disponibile :)' if result['prenotato'] == 0 else 'Prenotato :('}\nLink: http://www.newoldcamera.com/Scheda.aspx?Codice={result['codice']}"
                sendMessageToBot(msg)
-               #print(msg)
+               ignore_id_list.append(result['ID'])
+               print(msg) 
 
 def sendMessageToBot(message):
-   #start_time = time.time()
+   start_time = time.time()
    try:
       requests.post(TL_URL, json={'chat_id': CHAT_ID, 'text': message})
-      #time_diff = time.time() - start_time
-      #print(f'sending time: %.3f seconds.' % time_diff)
+      time_diff = time.time() - start_time
+      print(f'Telegram sending time: %.3f seconds.' % time_diff)
    except Exception as e:
       print(e)
 
 async def main():
-   #start_time = time.time()
+   start_time = time.time()
+   global ignore_id_list
+   with open('./ignore_id.txt', 'r') as f:
+      ignore_id_list = json.loads(f.read())
+
    tasks = []
-   for prd in list_to_scrape:
-      task = asyncio.create_task(scrape(prd))
+   for i in match_list:
+      task = asyncio.create_task(scrape(i))
       tasks.append(task)
    await asyncio.gather(*tasks)
-   #time_diff = time.time() - start_time
-   #print(f'Scraping time: %.3f seconds.' % time_diff)
+
+   with open('./ignore_id.txt', 'w') as f:
+      f.write(json.dumps(ignore_id_list))
+   time_diff = time.time() - start_time
+   print(f'Global time: %.3f seconds.' % time_diff)
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
