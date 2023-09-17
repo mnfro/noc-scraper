@@ -2,7 +2,7 @@ name: noc-scraper
 
 on:
   schedule:
-    - cron: '0,15,30,45 7-16 * * 2-6'
+    - cron: '* * * * *'
     
 jobs:
   build:
@@ -28,8 +28,8 @@ jobs:
         run: git status
       - name: git config
         run: |
-          git config --global user.name "mnfro"
-          git config --global user.email "manfredi.schiera@icloud.com"
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
       - name: stage changed files
         run: git add .
       - name: commit changed files
