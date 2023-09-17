@@ -24,8 +24,6 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python noc_scraper.py
 
-      - name: switching from HTTPS to SSH
-        run: git remote set-url origin git@github.com:mnfro/noc-scraper.git
       - name: check for changes
         run: git status
       - name: git config
