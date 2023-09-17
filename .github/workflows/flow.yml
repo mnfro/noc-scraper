@@ -2,7 +2,7 @@ name: noc-scraper
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '0,15,30,45 7-16 * * 2-6'
     
 jobs:
   build:
