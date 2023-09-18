@@ -1,0 +1,35 @@
+name: reset-flow
+
+on:
+  schedule:
+    - cron: '0 7 * * 1-6'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3
+        
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: execute python script
+        run: python reset_flow.py
+
+      - name: check for changes
+        run: git status
+      - name: git config
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+      - name: stage changed files
+        run: git add .
+      - name: commit changed files
+        run: git diff --exit-code || git commit -m "Resetting ignore_id.txt"
+      - name: fetch from main
+        run: git fetch origin main
+      - name: push code to main
+        run: git push origin HEAD:main
