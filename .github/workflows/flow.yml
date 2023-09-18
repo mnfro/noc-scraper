@@ -1,8 +1,7 @@
 name: noc-scraper
 
 on:
-  repository_dispatch:
-    types: [trigger-workflow]
+  workflow_dispatch:
   #schedule:
    # - cron: '0,15,30,45 7-16 * * 2-6'
     
