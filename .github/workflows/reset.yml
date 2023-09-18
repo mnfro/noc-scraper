@@ -1,8 +1,9 @@
 name: reset-flow
 
 on:
-  schedule:
-    - cron: '0 7 * * 1-6'
+  workflow_dispatch:
+  #schedule:
+    #- cron: '0 7 * * 1-6'
     
 jobs:
   build:
