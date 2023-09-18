@@ -20,8 +20,8 @@ jobs:
       - name: execute python script
         run: python reset_flow.py
 
-      - name: check for changes
-        run: git status
+      #- name: check for changes
+        #run: git status
       - name: git config
         run: |
           git config --global user.name github-actions
