@@ -32,11 +32,11 @@ jobs:
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
       - name: stage changed files
-        run: git add ignore_id.txt
+        run: git add .
       - name: check status
         run: git status
       - name: commit changed files
-        run: git diff --exit-code || git commit -m "Updating ignore_id.txt"
+        run: git commit -m "Updating ignore_id.txt" #git diff --exit-code || 
       - name: fetch from main
         run: git fetch origin main
       - name: push code to main
