@@ -36,7 +36,7 @@ jobs:
       - name: check status
         run: git status
       - name: commit changed files
-        run: git commit -m "Updating ignore_id.txt" #git diff --exit-code || 
+        run: git commit -m "Updating ignore_id.txt" || true #git diff --exit-code || 
       - name: fetch from main
         run: git fetch origin main
       - name: push code to main
