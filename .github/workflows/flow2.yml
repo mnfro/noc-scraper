@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache@v3.3.2
         id: cache-libraries
         with:
-          path: ${{ env.pythonLocation }}/lib/python3.11/site-packages
+          path: ${{ env.pythonLocation }}/lib/python3.10/site-packages
           key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
 
       - name: Cache dependency binaries
