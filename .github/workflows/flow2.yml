@@ -17,24 +17,26 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Cache dependency libraries
-        uses: actions/cache@v3.3.2
-        id: cache-libraries
-        with:
-          path: ${{ env.pythonLocation }}/lib/python3.10/site-packages
-          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
+      #- name: Cache dependency libraries
+        #uses: actions/cache@v3.3.2
+        #id: cache-libraries
+        #with:
+          #path: ${{ env.pythonLocation }}/lib/python3.10/site-packages
+          #key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
 
       - name: Cache dependency binaries
         uses: actions/cache@v3.3.2
-        id: cache-binaries
+        id: cache-python-env
         with:
-          path: ${{ env.pythonLocation }}/bin
+          path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
 
       - name: Install pip and dependencies
-        if: steps.cache-libraries.outputs.cache-hit != 'true' || steps.cache-binaries.outputs.cache-hit != 'true'
+        if: steps.cache-python-env.outputs.cache-hit != 'true' #|| steps.cache-binaries.outputs.cache-hit != 'true'
         run: |
-          pip install -r requirements.txt
+          python -m pip install -e .[develop]
+
+#pip install -r requirements.txt
 
       - name: execute python script
         env:
