@@ -6,7 +6,7 @@ import os
 import json
 import time
 
-API_URL = "http://api.newoldcamera.com/api/products"
+API_URL = "apinocservice.azurewebsites.net/api/products" #"http://api.newoldcamera.com/api/products"
 
 DATA_FUJI_CAMERA = {"marca":"FUJIFILM DIGITALE",
         "tipo":"CO",
@@ -33,7 +33,7 @@ HEADERS = {"Accept":"application/json, text/javascript, */*; q=0.01",
            "Accept-Language":"it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3",
            "Connection":"keep-alive",
            "Content-Type":"application/x-www-form-urlencoded; charset=UTF-8",
-           "Host":"api.newoldcamera.com",
+           "Host":"apinocservice.azurewebsites.net",
            "Origin":"http://www.newoldcamera.com",
            "Referer":"http://www.newoldcamera.com/",
            "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/117.0"}
