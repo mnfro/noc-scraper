@@ -6,7 +6,7 @@ import os
 import json
 import time
 
-API_URL = "apinocservice.azurewebsites.net/api/products" #"http://api.newoldcamera.com/api/products"
+API_URL = "https://apinocservice.azurewebsites.net/api/products" #"http://api.newoldcamera.com/api/products"
 
 DATA_FUJI_CAMERA = {"marca":"FUJIFILM DIGITALE",
         "tipo":"CO",
