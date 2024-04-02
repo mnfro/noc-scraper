@@ -50,7 +50,7 @@ TL_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
 Match = namedtuple('Match', ['keywords', 'data_params'])
 fujifilm_cameras = Match(['X100', 'X-100', 'X-E4', 'XE4'], DATA_FUJI_CAMERA)
 ricoh_cameras = Match(['GR'], DATA_RICOH_CAMERA)
-yashica_cameras = Match(['T'], DATA_YASHICA_CAMERA)
+yashica_cameras = Match(['T4'], DATA_YASHICA_CAMERA)
 canon_cameras = Match(['G7X'], DATA_CANON_CAMERA)
 fujifilm_lens = Match(['27'], DATA_FUJI_LENS)
 
