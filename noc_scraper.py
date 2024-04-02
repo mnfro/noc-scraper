@@ -8,22 +8,22 @@ import time
 
 API_URL = "https://apinocservice.azurewebsites.net/api/products" #"http://api.newoldcamera.com/api/products"
 
-DATA_FUJI_CAMERA = {"marca":"FUJIFILM DIGITALE",
+DATA_FUJI_CAMERA = {"marca":"FUJIFILM+DIGITALE",
         "tipo":"CO",
         "disponibile":"M",
         "bottega":"Usato"}
 
-DATA_FUJI_LENS = {"marca":"FUJIFILM DIGITALE",
+DATA_FUJI_LENS = {"marca":"FUJIFILM+DIGITALE",
         "tipo":"OB",
         "disponibile":"M",
         "bottega":"Usato"}
 
-DATA_RICOH_CAMERA = {"marca":"RICOH DIGITALE",
+DATA_RICOH_CAMERA = {"marca":"RICOH+DIGITALE",
         "tipo":"CO",
         "disponibile":"M",
         "bottega":"Usato"}
 
-DATA_CANON_CAMERA = {"marca":"CANON DIGITALE",
+DATA_CANON_CAMERA = {"marca":"CANON+DIGITALE",
         "tipo":"CO",
         "disponibile":"M",
         "bottega":"Usato"}
