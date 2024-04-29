@@ -13,6 +13,11 @@ DATA_FUJI_CAMERA = {"marca":"FUJIFILM DIGITALE",
         "disponibile":"M",
         "bottega":"Usato"}
 
+DATA_FUJI_CAMERA_X = {"marca":"FUJIFILM X",
+        "tipo":"CO",
+        "disponibile":"M",
+        "bottega":"Usato"}
+
 DATA_FUJI_LENS = {"marca":"FUJIFILM DIGITALE",
         "tipo":"OB",
         "disponibile":"M",
@@ -49,12 +54,13 @@ TL_URL = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
 
 Match = namedtuple('Match', ['keywords', 'data_params'])
 fujifilm_cameras = Match(['100', 'E4'], DATA_FUJI_CAMERA)
+fujifilm_cameras_x = Match(['100', 'E4'], DATA_FUJI_CAMERA_X)
 ricoh_cameras = Match(['GR'], DATA_RICOH_CAMERA)
 yashica_cameras = Match(['T4'], DATA_YASHICA_CAMERA)
 canon_cameras = Match(['G7X'], DATA_CANON_CAMERA)
 fujifilm_lens = Match(['27'], DATA_FUJI_LENS)
 
-match_list = [fujifilm_cameras, ricoh_cameras, yashica_cameras, canon_cameras, fujifilm_lens]
+match_list = [fujifilm_cameras, fujifilm_cameras_x, ricoh_cameras, yashica_cameras, canon_cameras, fujifilm_lens]
 ignore_id_list = []
 
 async def scrape(match: Match):
