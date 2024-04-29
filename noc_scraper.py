@@ -18,7 +18,7 @@ DATA_FUJI_CAMERA_X = {"marca":"FUJIFILM X",
         "disponibile":"M",
         "bottega":"Usato"}
 
-DATA_FUJI_LENS = {"marca":"FUJIFILM DIGITALE",
+DATA_FUJI_LENS = {"marca":"FUJIFILM X",
         "tipo":"OB",
         "disponibile":"M",
         "bottega":"Usato"}
@@ -60,7 +60,7 @@ yashica_cameras = Match(['T4'], DATA_YASHICA_CAMERA)
 canon_cameras = Match(['G7X'], DATA_CANON_CAMERA)
 fujifilm_lens = Match(['27'], DATA_FUJI_LENS)
 
-match_list = [fujifilm_cameras, fujifilm_cameras_x, ricoh_cameras, yashica_cameras, canon_cameras, fujifilm_lens]
+match_list = [fujifilm_cameras_x, ricoh_cameras, yashica_cameras, canon_cameras, fujifilm_lens, fujifilm_cameras]
 ignore_id_list = []
 
 async def scrape(match: Match):
